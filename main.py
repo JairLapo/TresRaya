@@ -3,7 +3,7 @@ import json
 
 
 def main(page: ft.Page):
-    # set properties for the window
+    # Propiedades de ventana
     page.title = "Tres en raya"
     page.window_width = 300
     page.window_height = 360
@@ -17,21 +17,21 @@ def main(page: ft.Page):
                    25, 27, 29]
     fields_border = []
 
-    # create a list of horizontal lines
+    # creación de lista para líneas horizontales
     horizontal_lines = [[13, 15, 17],
                         [19, 21, 23],
                         [25, 27, 29]]
 
-    # create a list of vertical lines
+    # creación de lista para líneas verticales
     vertical_lines = [[13, 19, 25],
                       [15, 21, 27],
                       [17, 23, 29]]
 
-    # create a list of diagonal lines
+    # creación de lista apra líneas diagonales
     diagonal_lines = [[13, 21, 29],
                       [17, 21, 25]]
 
-    # combine all lines into a single list
+    # combinación de líneas en una sola lista
     lines = horizontal_lines + vertical_lines + diagonal_lines
 
     def close(e):
@@ -39,11 +39,10 @@ def main(page: ft.Page):
 
     def win(player):
         """
-        The win function is called when a player wins the game. 
-        It sets the text color based on the winning player and 
-        updates the GUI to show that the game is over.
+        Función llamada al decidir el ganador
+        Es estética simplemente para el mensaje final
         """
-        # set the text color based on the winning player
+        # Se asigna el color del texto según el jugador ganador
         c = "blue" if player == "Azul" else "red"
         page.window_frameless = False
         page.clean()
@@ -65,10 +64,8 @@ def main(page: ft.Page):
 
     def drag_accept(e):
         """
-        The drag_accept function is called when a player drags 
-        and drops a game piece onto the game board. It updates 
-        the game board to reflect the move and checks if the move 
-        resulted in a win. If so, it calls the win function.
+        Función de arrastre de los cuadros,
+        valida si existe un jugador que ha ganado aún o no
         """
         src = page.get_control(e.src_id)
         field = int(e.target[1:])
@@ -82,7 +79,7 @@ def main(page: ft.Page):
 
         if field not in fields_border:
 
-            # 10 is the id of the red player
+            # ID:10 Jugador Rojo
             if id_player == 10 and field in fields_left:
                 player_red.append(field)
                 player_red.sort()
@@ -100,7 +97,7 @@ def main(page: ft.Page):
                     )
                 fields_border.append(field)
 
-            # 6 is the id of the blue player
+            # ID: 6 Jugador azul
             if id_player == 6 and field in fields_left:
                 player_blue.append(field)
                 player_blue.sort()
@@ -124,11 +121,11 @@ def main(page: ft.Page):
             e.control.update()
 
         for line in lines:
-            # check if all numbers in a line are present in player_red's numbers
+            # Verificación si la línea ya está llena para el jugador rojo
             if all(num in player_red for num in line):
                 win("Rojo")
 
-            # check if all numbers in a line are present in player_blue's numbers
+            # Verificación si la línea ya está llena para el jugador azul
             if all(num in player_blue for num in line):
                 win("Azul")
 
