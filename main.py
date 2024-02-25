@@ -35,7 +35,7 @@ def main(page: ft.Page):
     lines = horizontal_lines + vertical_lines + diagonal_lines
 
     def close(e):
-        page.window_close()
+        page.update()
 
     def win(player):
         """
@@ -51,12 +51,7 @@ def main(page: ft.Page):
                 [
                     ft.Container(
                         ft.Text(f"Jugador {player} ganó!", size=25,
-                                color=c), alignment=ft.alignment.center),
-                    ft.Container(
-                        ft.IconButton(
-                            icon=ft.icons.CLOSE,  icon_size=100, on_click=close,
-
-                        ), alignment=ft.alignment.center),
+                                color=c), alignment=ft.alignment.bottom_center),
                 ]),
         )
 
@@ -139,8 +134,8 @@ def main(page: ft.Page):
                         ft.Draggable(
                             group="color",
                             content=ft.Container(
-                                width=50,
-                                height=50,
+                                width=100,
+                                height=100,
                                 bgcolor=ft.colors.BLUE,
                                 border_radius=5,
                             ),
@@ -155,8 +150,8 @@ def main(page: ft.Page):
                             group="color",
                             content=ft.Container(
                                 margin=ft.margin.only(left=60),
-                                width=50,
-                                height=50,
+                                width=100,
+                                height=100,
                                 bgcolor=ft.colors.RED,
                                 border_radius=5,
                             ),
@@ -166,14 +161,14 @@ def main(page: ft.Page):
                 ),
 
 
-            ]
+            ], alignment=ft.MainAxisAlignment.CENTER
         )
     )
-
+    page.vertical_alignment = ft.MainAxisAlignment.CENTER
     grid = ft.GridView(
-        expand=1,
+        expand=5,
         runs_count=5,
-        max_extent=100,
+        max_extent=200,
         child_aspect_ratio=1.0,
         spacing=5,
         run_spacing=5,
@@ -186,8 +181,8 @@ def main(page: ft.Page):
             ft.DragTarget(
                 group="color",
                 content=ft.Container(
-                    width=50,
-                    height=50,
+                    width=100,
+                    height=100,
                     bgcolor=ft.colors.BLUE_GREY_100,
                     border_radius=5,
                 ),
