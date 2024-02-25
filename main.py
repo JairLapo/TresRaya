@@ -44,7 +44,7 @@ def main(page: ft.Page):
         updates the GUI to show that the game is over.
         """
         # set the text color based on the winning player
-        c = "blue" if player == "Blue" else "red"
+        c = "blue" if player == "Azul" else "red"
         page.window_frameless = False
         page.clean()
         page.add(
@@ -126,11 +126,11 @@ def main(page: ft.Page):
         for line in lines:
             # check if all numbers in a line are present in player_red's numbers
             if all(num in player_red for num in line):
-                win("Red")
+                win("Rojo")
 
             # check if all numbers in a line are present in player_blue's numbers
             if all(num in player_blue for num in line):
-                win("Blue")
+                win("Azul")
 
     page.add(
         ft.Row(
